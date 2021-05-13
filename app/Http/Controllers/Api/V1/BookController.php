@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Resources\BookResource;
-use App\Http\Resources\BookResourceCollection;
 use App\Models\Book;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\BookRequest;
+use App\Http\Resources\V1\BookResource;
+use App\Http\Resources\V1\BookResourceCollection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Pagination\Paginator;
+
 
 
 class BookController extends Controller
@@ -20,7 +21,6 @@ class BookController extends Controller
      */
     public function index()
     {
-        // $book =  Book::paginate(25);
         $book =  Book::with([
             'Category'   => function($query){$query->addSelect(array('id', 'name'));},
             'Author'     => function($query){$query->addSelect(array('id', 'name'));},
@@ -39,12 +39,11 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookRequest  $request)
     {
-        $data = $this->validateRequest();
-        $book = Book::create($data);
+        $validated = $request->validated();
+        $book = Book::create($validated);
         return new BookResource($book);
-        // return response()->json($book);
     }
 
     /**
@@ -80,13 +79,12 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookRequest  $request, $id)
     {
         try {
             $book = Book::findOrFail($id);
-
-            $data = $this->validateRequest();
-            $book->update($data);
+            $validated = $request->validated();
+            $book->update($validated);
         }
         catch (ModelNotFoundException $e) {
 
@@ -114,27 +112,5 @@ class BookController extends Controller
         }
         
         return response()->json(['message'=>'successfully deleted']);
-    }
-
-    private function validateRequest(){
-        return request()->validate([
-
-            "author_id"     => 'sometimes','nullable','integer',
-            "publisher_id"  => 'sometimes','nullable','integer',
-            "category_id"   => 'required','integer',
-            "age_id"        => 'required','integer',
-            "shelf_id"      => 'sometimes','nullable','integer',
-            "title"         => 'required','string', 'min:1',
-            "description"   => 'required','string', 'min:30', 'max:300',
-            "tags"          => 'sometimes','nullable','string',
-            "pages"         => 'required','string', 'min:1',
-            "stock"         => 'required', 'min:1',
-            "Language"      => 'required','string',
-            "weight"        => 'sometimes','nullable','min:1',
-            "Dimensions"    => 'sometimes','nullable','min:3',
-            "reward"        => 'sometimes','nullable','string',
-            "release_date"  => 'sometimes','nullable','date',
-            "cover_image"   => 'sometimes','nullable','string',
-        ]);
     }
 }

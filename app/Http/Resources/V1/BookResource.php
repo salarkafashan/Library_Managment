@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\V1;
 
-use App\Models\Category;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookResource extends JsonResource
