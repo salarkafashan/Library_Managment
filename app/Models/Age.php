@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Age extends Model
 {
     use HasFactory;
+
+    public function Books()
+    {
+        return $this->belongsToMany('App\Models\Book');
+    }
 }
