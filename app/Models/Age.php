@@ -9,6 +9,8 @@ class Age extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function Books()
     {
         return $this->belongsToMany('App\Models\Book');

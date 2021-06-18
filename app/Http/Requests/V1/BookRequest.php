@@ -24,22 +24,22 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            "author_id"     => 'sometimes','nullable','integer',
-            "publisher_id"  => 'sometimes','nullable','integer',
-            "category_id"   => 'required','integer',
-            "age_id"        => 'required','integer',
-            "shelf_id"      => 'sometimes','nullable','integer',
-            "title"         => 'required','string', 'min:1',
-            "description"   => 'required','string', 'min:30', 'max:300',
-            "tags"          => 'sometimes','nullable','string',
-            "pages"         => 'required','string', 'min:1',
-            "stock"         => 'required', 'min:1',
-            "Language"      => 'required','string',
-            "weight"        => 'sometimes','nullable','min:1',
-            "Dimensions"    => 'sometimes','nullable','min:3',
-            "reward"        => 'sometimes','nullable','string',
-            "release_date"  => 'sometimes','nullable','date',
-            "cover_image"   => 'sometimes','nullable','string',
+            "author_id"     => 'sometimes|nullable|integer',
+            "publisher_id"  => 'sometimes|nullable|integer',
+            "category_id"   => 'required|integer',
+            "age_id"        => 'required|integer',
+            "shelf_id"      => 'sometimes|nullable|integer',
+            "title"         => 'required|string|min:1',
+            "description"   => 'required|string|min:30|max:300',
+            "tags"          => 'sometimes|nullable|string',
+            "pages"         => 'required|string|min:1',
+            "stock"         => 'required|min:1',
+            "Language"      => 'required|string',
+            "weight"        => 'sometimes|nullable|min:1',
+            "Dimensions"    => 'sometimes|nullable|min:3',
+            "reward"        => 'sometimes|nullable|string',
+            "release_date"  => 'sometimes|nullable|date',
+            "cover_image"   => 'sometimes|nullable|string',
         ];
     }
 

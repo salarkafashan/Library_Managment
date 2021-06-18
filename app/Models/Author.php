@@ -9,6 +9,8 @@ class Author extends Model
 {
     use HasFactory;
     
+    protected $guarded = [];
+    
     public function Books()
     {
         return $this->hasMany('App\Models\Book');

@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\BookRequest;
 use App\Http\Resources\V1\BookResource;
 use App\Http\Resources\V1\BookResourceCollection;
+use App\Models\Author;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 
 

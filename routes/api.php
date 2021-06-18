@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AgeController;
 use App\Http\Controllers\Api\V1\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function(){
     Route::apiResource('books', BookController::class);
+    Route::apiResource('ages', AgeController::class);
+    Route::post('test', [BookController::class,'test']);
 }); 
