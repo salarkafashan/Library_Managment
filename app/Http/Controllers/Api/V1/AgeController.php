@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\AgeRequest;
+use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Resources\V1\AgeResource;
 use App\Http\Resources\V1\AgeResourceCollection;
+use App\Http\Resources\V1\UserResource;
 use App\Models\Age;
+use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
